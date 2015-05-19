@@ -11,13 +11,12 @@ import UIKit
 class PrettyImageView: UIView {
 
     var outlineColor: UIColor?
+    var animationDuration = CFTimeInterval(3.0)
     var image: UIImage? {
         didSet { revealImageView.image = image }
     }
     
     private let revealImageView: UIImageView
-    
-    private let kAnimationDuration = CFTimeInterval(3.0)
     
     init(image: UIImage?, frame: CGRect) {
         revealImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height))
@@ -74,7 +73,7 @@ class PrettyImageView: UIView {
         
         let revealAnimation = getRevealAnimation(startPath.CGPath, finalPath: finalPath.CGPath)
         
-        let timeToShow = dispatch_time(DISPATCH_TIME_NOW, Int64(kAnimationDuration / 2.0 * Double(NSEC_PER_SEC)))
+        let timeToShow = dispatch_time(DISPATCH_TIME_NOW, Int64(animationDuration / 2.0 * Double(NSEC_PER_SEC)))
         dispatch_after(timeToShow, dispatch_get_main_queue()) {
             self.revealImageView.hidden = false
         }
@@ -102,7 +101,7 @@ class PrettyImageView: UIView {
     
     private var outlineAnimation: CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
-        animation.duration = kAnimationDuration
+        animation.duration = animationDuration
         animation.repeatCount = 1.0
         animation.fromValue = 0.0
         animation.toValue = 1.0
@@ -121,10 +120,10 @@ class PrettyImageView: UIView {
         let revealAnimation = CABasicAnimation(keyPath: "path")
         revealAnimation.fromValue = startPath
         revealAnimation.toValue = finalPath
-        revealAnimation.duration = kAnimationDuration / 2.0
+        revealAnimation.duration = animationDuration / 2.0
         revealAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         revealAnimation.repeatCount = 1.0
-        revealAnimation.beginTime = CACurrentMediaTime() + kAnimationDuration / 2.0
+        revealAnimation.beginTime = CACurrentMediaTime() + animationDuration / 2.0
         
         return revealAnimation
     }
