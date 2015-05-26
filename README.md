@@ -12,5 +12,5 @@ Simple Image View with beautiful loading animation written in Swift.
 
 Thanks for watching. Project inspired by [navoshta](https://github.com/navoshta/RevealImageDemo)
 
-Author: Arthur Myronenko - [@monkey_is_gone](https://twitter.com/monkey_is_gone)
+Author: Arthur Myronenko - [@monkey_has_gone](https://twitter.com/monkey_has_gone)
 
